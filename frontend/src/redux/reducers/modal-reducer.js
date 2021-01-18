@@ -17,7 +17,7 @@ export default (state = initialState, { type, payload }) => {
                 productData: null,
             }    
             
-        case MODAL_ACTIONS.UPDATE_PRODUCT:
+        case MODAL_ACTIONS.EDIT_PRODUCT:
             return {
                 ...state,
                 open: true,

@@ -8,7 +8,6 @@ import {
 } from './styles/single-product';
 
 import formatDate from '../../utils/formatDate';
-import convertNumberToMoney from '../../utils/convertNumberToMoney';
 import { PRODUCT_ACTIONS } from '../../redux/actions/product-action';
 import { MODAL_ACTIONS } from '../../redux/actions/modal-actions';
 
@@ -18,7 +17,7 @@ function SingleProduct({ product, deleteProduct }) {
     const { _id, Nome, Descricao, Valor, Vencimento } = product;
 
     function handleEdit() {
-        dispatch({ type: MODAL_ACTIONS.UPDATE_PRODUCT, payload: product });
+        dispatch({ type: MODAL_ACTIONS.EDIT_PRODUCT, payload: product });
     }
 
     function handleDelete() {
@@ -31,7 +30,7 @@ function SingleProduct({ product, deleteProduct }) {
         <Container>
             <Cell>{Nome}</Cell>
             <Cell>{Descricao}</Cell>
-            <Cell>{convertNumberToMoney(Valor)}</Cell>
+            <Cell>R$ {Valor}</Cell>
             <Cell>{formatDate(Vencimento)}</Cell>
             <Actions>
                 <Action onClick={handleEdit}>

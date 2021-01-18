@@ -63,24 +63,34 @@ function FormProduct({ createProduct, updateProduct }) {
     }
 
     function handleCancel() {
-            reduxDispatch({ type: MODAL_ACTIONS.CLOSE });
+        reduxDispatch({ type: MODAL_ACTIONS.CLOSE });
+    }
+
+    function validateValue(value) {
+        const checkIfDecimal = value.toString().search(/\./) > -1;
+
+        if(checkIfDecimal) {
+            return value.replace(/R\$\s/g, '').replace(',', '');
+        } else {
+            return value.replace(/\D/g, '');
+        }
     }
 
     function handleSubmit(e) {
         e.preventDefault();
 
-        const formattedDTO = {
+        const requestDTO = {
             ...state,
-            Valor: state.Valor.toString().replace(/\D/g, ''),
+            Valor: validateValue(state.Valor),
         }
-
+        
         switch(modalType) {
             case MODAL_TYPES.ADD:
-                createProduct(formattedDTO);
+                createProduct(requestDTO);
                 break;
 
             case MODAL_TYPES.UPDATE:
-                updateProduct(formattedDTO);
+                updateProduct(requestDTO);
                 break;
 
             default:

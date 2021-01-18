@@ -35,7 +35,6 @@ export async function updateExistingProduct(payload) {
 }
 
 export async function deleteExistingProduct(productId) {
-    console.log(productId);
     try {
         await axios.delete(`products/${productId}`);
 
